@@ -1,4 +1,3 @@
-
 (() => {
   const doc = document.documentElement;
   const body = document.body;
@@ -9,11 +8,78 @@
   const panel = document.querySelector('[data-mobile-panel]');
   let lastY = window.scrollY;
 
+  const WHATSAPP_NUMBER = '16892290770';
+  const FACEBOOK_URL = 'https://www.facebook.com/share/1JxasHrmQS/?mibextid=wwXIfr';
+  const EDERITO_INSTAGRAM_URL = 'https://www.instagram.com/ederito_studio/';
+
+  const mobilePatch = document.createElement('style');
+  mobilePatch.textContent = `
+    [data-mobile-panel][hidden]{display:none!important}
+    @media (max-width: 980px){
+      .mobile-panel{
+        position:fixed!important;
+        inset:0!important;
+        z-index:9999!important;
+        width:100%!important;
+        height:100dvh!important;
+        padding:max(24px,env(safe-area-inset-top)) 24px max(24px,env(safe-area-inset-bottom))!important;
+        overflow-y:auto!important;
+        background:#051a29!important;
+        color:#fff!important;
+        opacity:1!important;
+        isolation:isolate!important;
+      }
+      .mobile-panel::before{content:none!important}
+      .mobile-panel__head{position:relative;z-index:2;min-height:48px}
+      .mobile-panel__head button{width:48px;height:48px;display:grid;place-items:center;font-size:2.2rem;line-height:1}
+      .mobile-nav{
+        position:relative!important;
+        z-index:2!important;
+        height:auto!important;
+        min-height:calc(100dvh - 120px)!important;
+        padding:28px 0 36px!important;
+        justify-content:flex-start!important;
+        gap:10px!important;
+      }
+      .mobile-nav>a:not(.button){
+        display:block!important;
+        padding:7px 0!important;
+        font-size:clamp(2rem,10vw,3.25rem)!important;
+        line-height:1.04!important;
+        color:#fff!important;
+        opacity:1!important;
+      }
+      .mobile-nav .button{margin-top:12px!important;width:100%!important}
+      body.menu-open .site-header{transform:none!important}
+    }
+    .whatsapp-float{
+      position:fixed;right:20px;bottom:22px;z-index:90;width:58px;height:58px;border-radius:50%;
+      display:grid;place-items:center;background:#25D366;color:#fff;box-shadow:0 18px 42px rgba(0,0,0,.22);
+      font:800 1.35rem/1 system-ui;text-decoration:none;transition:transform .2s ease
+    }
+    .whatsapp-float:hover{transform:translateY(-3px)}
+    .whatsapp-float svg{width:29px;height:29px;fill:currentColor}
+    @media (max-width:980px){.whatsapp-float{bottom:92px;right:16px;width:54px;height:54px}}
+    .footer-socials{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .footer-socials a{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:9px 14px;border:1px solid rgba(255,255,255,.18);border-radius:999px;font-size:.78rem;font-weight:800}
+    .whatsapp-contact-card{padding:28px;border-radius:24px;background:linear-gradient(135deg,#073e68,#078dc2);color:#fff;box-shadow:0 24px 60px rgba(5,35,54,.18)}
+    .whatsapp-contact-card h3{margin:0 0 10px;font:700 2rem/1.1 "Playfair Display",serif}
+    .whatsapp-contact-card p{margin:0 0 20px;color:rgba(255,255,255,.82)}
+  `;
+  document.head.appendChild(mobilePatch);
+
   function setMenu(open){
     if(!menuButton || !panel) return;
     menuButton.setAttribute('aria-expanded', String(open));
     panel.hidden = !open;
+    panel.setAttribute('aria-hidden', String(!open));
     body.classList.toggle('menu-open', open);
+    if(open){
+      panel.scrollTop = 0;
+      requestAnimationFrame(() => menuClose?.focus());
+    } else {
+      menuButton.focus({preventScroll:true});
+    }
   }
   menuButton?.addEventListener('click', () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
   menuClose?.addEventListener('click', () => setMenu(false));
@@ -50,26 +116,37 @@
 
   document.querySelectorAll('[data-accordion-button]').forEach(button => {
     button.addEventListener('click', () => {
-      const panel = button.parentElement.querySelector('.accordion__panel');
+      const accordionPanel = button.parentElement.querySelector('.accordion__panel');
       const expanded = button.getAttribute('aria-expanded') === 'true';
       button.setAttribute('aria-expanded', String(!expanded));
-      panel.hidden = expanded;
+      accordionPanel.hidden = expanded;
       const icon = button.querySelector('[data-accordion-icon]');
       if(icon) icon.textContent = expanded ? '+' : '−';
     });
   });
 
   const messages = {
-    fr:{contact:'Merci. Votre demande a été enregistrée dans cette démonstration. La connexion au courriel professionnel sera ajoutée avant le lancement.',newsletter:'Merci. Votre inscription a été enregistrée dans cette démonstration.',booking:'Merci. Votre sélection est prête. L’étape suivante sera la connexion sécurisée à Stripe et au calendrier en direct.'},
-    en:{contact:'Thank you. Your request has been recorded in this demonstration. The professional email connection will be added before launch.',newsletter:'Thank you. Your signup has been recorded in this demonstration.',booking:'Thank you. Your selection is ready. The next step will be the secure Stripe and live-calendar connection.'}
+    fr:{contact:'Ouverture de WhatsApp…',newsletter:'Merci. Votre inscription a été enregistrée dans cette démonstration.',booking:'Merci. Votre sélection est prête. L’étape suivante sera la connexion sécurisée à Stripe et au calendrier en direct.'},
+    en:{contact:'Opening WhatsApp…',newsletter:'Thank you. Your signup has been recorded in this demonstration.',booking:'Thank you. Your selection is ready. The next step will be the secure Stripe and live-calendar connection.'}
   };
+
+  function whatsappUrl(message){
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  }
+
   document.querySelectorAll('[data-demo-form]').forEach(form => {
     form.addEventListener('submit', e => {
       e.preventDefault();
       const status = form.querySelector('.form-status');
-      if(status) status.textContent = messages[lang][form.dataset.message || 'contact'];
+      const inputs = [...form.querySelectorAll('input,select,textarea')];
+      const values = inputs.filter(el => el.type !== 'checkbox').map(el => el.value?.trim()).filter(Boolean);
+      const heading = lang === 'fr' ? 'Bonjour Stéphanie, je vous contacte depuis le site Becoming Training Center.' : 'Hello Stephanie, I am contacting you from the Becoming Training Center website.';
+      const message = [heading, ...values].join('\n');
+      if(status) status.textContent = messages[lang].contact;
+      window.open(whatsappUrl(message), '_blank', 'noopener,noreferrer');
     });
   });
+
   document.querySelectorAll('[data-booking-form]').forEach(form => {
     const program = form.querySelector('#program-select');
     const format = form.querySelector('#format-select');
@@ -105,5 +182,23 @@
       card.style.setProperty('--my', `${e.clientY-r.top}px`);
     });
   });
+
+  const whatsappFloat = document.createElement('a');
+  whatsappFloat.className = 'whatsapp-float';
+  whatsappFloat.href = whatsappUrl(lang === 'fr' ? 'Bonjour Stéphanie, je souhaite obtenir plus d’informations sur Becoming Training Center.' : 'Hello Stephanie, I would like more information about Becoming Training Center.');
+  whatsappFloat.target = '_blank';
+  whatsappFloat.rel = 'noopener noreferrer';
+  whatsappFloat.setAttribute('aria-label', lang === 'fr' ? 'Contacter Stéphanie sur WhatsApp' : 'Contact Stephanie on WhatsApp');
+  whatsappFloat.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.11 17.33c-.26-.13-1.53-.75-1.77-.84-.24-.09-.41-.13-.59.13-.17.26-.67.84-.82 1.01-.15.17-.3.19-.56.06-.26-.13-1.08-.4-2.06-1.27-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.06-.13-.59-1.42-.8-1.94-.21-.51-.43-.44-.59-.45h-.5c-.17 0-.45.06-.69.32-.24.26-.91.89-.91 2.17s.93 2.52 1.06 2.69c.13.17 1.83 2.8 4.44 3.93.62.27 1.1.43 1.48.55.62.2 1.19.17 1.64.1.5-.07 1.53-.63 1.75-1.23.22-.6.22-1.12.15-1.23-.06-.11-.24-.17-.5-.3M16.03 3.2A12.72 12.72 0 0 0 5.08 22.38L3.2 28.8l6.58-1.73a12.78 12.78 0 1 0 6.25-23.87m0 23.17c-2.04 0-4.03-.55-5.76-1.59l-.41-.24-3.9 1.02 1.04-3.8-.27-.43a10.36 10.36 0 1 1 9.3 5.04"/></svg>';
+  document.body.appendChild(whatsappFloat);
+
+  const footerBrand = document.querySelector('.footer-brand');
+  if(footerBrand){
+    const socials = document.createElement('div');
+    socials.className = 'footer-socials';
+    socials.innerHTML = `<a href="${FACEBOOK_URL}" target="_blank" rel="noopener noreferrer">Facebook</a><a href="${whatsappUrl(lang === 'fr' ? 'Bonjour Stéphanie, je vous contacte depuis le site.' : 'Hello Stephanie, I am contacting you from the website.')}" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="${EDERITO_INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer">Ederito Studio</a>`;
+    footerBrand.appendChild(socials);
+  }
+
   document.querySelectorAll('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
 })();
