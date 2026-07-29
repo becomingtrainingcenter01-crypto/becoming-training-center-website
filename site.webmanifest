@@ -1,0 +1,15 @@
+{
+  "name": "Becoming Training Center",
+  "short_name": "Becoming",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fbfaf6",
+  "theme_color": "#061d2c",
+  "icons": [
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
