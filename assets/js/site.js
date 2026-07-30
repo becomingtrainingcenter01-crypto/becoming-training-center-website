@@ -118,13 +118,18 @@
   document.querySelectorAll('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
 
   const assetRoot = location.pathname.includes('/en/') ? '../' : '';
-  const scheduleScript = document.createElement('script');
-  scheduleScript.src = `${assetRoot}assets/js/schedule-update.js`;
-  scheduleScript.defer = true;
-  document.body.appendChild(scheduleScript);
+  const loadScript = (src) => {
+    const script = document.createElement('script');
+    script.src = `${assetRoot}${src}`;
+    script.defer = true;
+    document.body.appendChild(script);
+  };
 
-  const personalImagesScript = document.createElement('script');
-  personalImagesScript.src = `${assetRoot}assets/js/personal-images.js`;
-  personalImagesScript.defer = true;
-  document.body.appendChild(personalImagesScript);
+  loadScript('assets/js/schedule-update.js');
+
+  if(location.pathname.endsWith('coaching.html')){
+    loadScript('assets/js/personal-coaching-field.js');
+  } else {
+    loadScript('assets/js/personal-images.js');
+  }
 })();
