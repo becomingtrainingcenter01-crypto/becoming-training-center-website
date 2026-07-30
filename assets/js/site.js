@@ -117,8 +117,14 @@
 
   document.querySelectorAll('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
 
+  const assetRoot = location.pathname.includes('/en/') ? '../' : '';
   const scheduleScript = document.createElement('script');
-  scheduleScript.src = `${location.pathname.includes('/en/') ? '../' : ''}assets/js/schedule-update.js`;
+  scheduleScript.src = `${assetRoot}assets/js/schedule-update.js`;
   scheduleScript.defer = true;
   document.body.appendChild(scheduleScript);
+
+  const personalImagesScript = document.createElement('script');
+  personalImagesScript.src = `${assetRoot}assets/js/personal-images.js`;
+  personalImagesScript.defer = true;
+  document.body.appendChild(personalImagesScript);
 })();
