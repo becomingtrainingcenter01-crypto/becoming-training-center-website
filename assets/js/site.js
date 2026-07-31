@@ -126,6 +126,7 @@
   };
 
   loadScript('assets/js/schedule-update.js');
+  loadScript('assets/js/pricing-copy-update.js');
 
   if(location.pathname.endsWith('coaching.html')){
     loadScript('assets/js/personal-coaching-field.js');
