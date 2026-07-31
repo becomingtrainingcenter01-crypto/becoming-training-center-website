@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#061d2c">
+<title>Réservation | Becoming Training Center</title>
+<meta name="description" content="Réservez une séance ou un module de coaching Becoming Training Center.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+.booking-page{background:linear-gradient(180deg,#f5fafb,#fff)}
+.booking-hero{padding:84px 0 54px;background:#061d2c;color:#fff}.booking-hero h1{max-width:800px;margin:10px 0 16px;font:700 clamp(2.7rem,7vw,5.6rem)/.98 "Playfair Display",serif}.booking-hero p{max-width:760px;color:#bfd0da;font-size:1.08rem}
+.booking-shell{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;align-items:start}.booking-card{padding:clamp(22px,4vw,42px);background:#fff;border:1px solid rgba(7,62,104,.13);box-shadow:0 22px 60px rgba(7,40,61,.08)}
+.booking-summary{position:sticky;top:115px;padding:28px;background:#edf5f7;border-left:4px solid #078dc2}.booking-summary strong{display:block;margin:8px 0;color:#061d2c;font:700 2.7rem/1 "Playfair Display",serif}.booking-summary p,.booking-summary li{color:#526b79}.booking-summary ul{padding-left:20px}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{display:block}.field--full{grid-column:1/-1}.field>span{display:block;margin-bottom:8px;font-weight:800;color:#102d3e}.field input,.field select,.field textarea{width:100%;box-sizing:border-box;padding:14px 15px;border:1px solid rgba(7,62,104,.22);border-radius:8px;background:#fff;color:#071b29;font:inherit}.field textarea{resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid rgba(7,141,194,.14);border-color:#078dc2}.booking-availability{margin:18px 0;padding:14px 16px;border-radius:7px;font-weight:700}.booking-availability:empty{display:none}.booking-availability.is-success{background:#edf9e8;color:#20562b}.booking-availability.is-error{background:#fff0ef;color:#8a251d}.booking-availability.is-info{background:#edf5f7;color:#21495e}.price-panel{display:flex;justify-content:space-between;align-items:end;margin:24px 0;padding:20px;border:1px solid rgba(7,62,104,.13);background:#f8fbfc}.price-panel strong{font:700 2.2rem/1 "Playfair Display",serif;color:#073e68}.payment-notice{margin:18px 0;padding:14px;border-left:3px solid #f3b43f;background:#fff8e8;color:#654b16}.form-status{margin-top:18px;line-height:1.6}.form-status.is-success{padding:16px;background:#edf9e8;color:#20562b}.form-status.is-error{padding:16px;background:#fff0ef;color:#8a251d}.consent{display:flex;gap:10px;align-items:flex-start;margin:20px 0}.consent input{margin-top:4px}.honeypot{position:absolute!important;left:-9999px!important}
+@media(max-width:900px){.booking-shell{grid-template-columns:1fr}.booking-summary{position:static}}@media(max-width:650px){.field-grid{grid-template-columns:1fr}.field--full{grid-column:auto}}
+</style>
+</head>
+<body data-lang="fr" class="booking-page">
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+<a class="skip-link" href="#main">Aller au contenu principal</a>
+<div class="announcement"><div class="container announcement__inner"><span>Réservations en ligne</span><a href="en/booking.html">English</a></div></div>
+<header class="site-header" data-header><div class="container header-shell"><a class="brand" href="index.html"><img src="assets/images/logo.png" alt="Becoming Training Center"></a><nav class="desktop-nav"><a href="index.html">Accueil</a><a href="about.html">À propos</a><a href="trainings.html">Formations</a><a href="coaching.html">Coaching</a><a href="resources.html">Ressources</a><a href="vip.html">VIP Club</a><a href="contact.html">Contact</a></nav><div class="header-actions"><a class="lang-switch" href="en/booking.html">EN</a><button class="menu-button" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-menu-button><span></span><span></span></button></div></div><div class="mobile-panel" data-mobile-panel hidden><div class="mobile-panel__head"><span>Menu</span><button type="button" data-menu-close>×</button></div><nav class="mobile-nav"><a href="index.html">Accueil</a><a href="coaching.html">Coaching</a><a href="contact.html">Contact</a><a href="en/booking.html">EN — English</a></nav></div></header>
+<main id="main">
+<section class="booking-hero"><div class="container"><span class="kicker kicker--light">Réservation</span><h1>Choisissez votre accompagnement.</h1><p>Réservez une séance personnelle, un module ou un programme complet. Les horaires sont affichés en heure de l’Est.</p></div></section>
+<section class="section"><div class="container booking-shell">
+<div class="booking-card">
+<form data-real-booking-form novalidate>
+<div class="field-grid">
+<label class="field"><span>Nom complet</span><input id="full-name" type="text" autocomplete="name" required maxlength="120"></label>
+<label class="field"><span>Courriel</span><input id="email" type="email" autocomplete="email" required maxlength="254"></label>
+<label class="field"><span>Téléphone</span><input id="phone" type="tel" autocomplete="tel" maxlength="40"></label>
+<label class="field"><span>Programme</span><select id="program-select" required><option>Chargement…</option></select></label>
+<label class="field"><span>Type de réservation</span><select id="format-select" required><option value="">Sélectionnez un programme</option></select></label>
+<label class="field" data-module-wrap hidden><span>Module</span><select id="module-select"></select></label>
+<label class="field"><span>Date souhaitée</span><input id="preferred-date" type="date" required></label>
+<label class="field"><span>Heure</span><select id="preferred-time" required><option value="">Sélectionnez</option></select></label>
+<label class="field"><span>Mode de rencontre</span><select id="meeting-method" required><option value="zoom">Zoom</option><option value="telephone">Téléphone</option><option value="other">Autre</option></select></label>
+<label class="field" data-other-meeting-wrap hidden><span>Précisez l’autre option</span><input id="other-meeting-method" type="text" maxlength="120"></label>
+<label class="field field--full" data-topic-wrap hidden><span>De quoi souhaitez-vous parler ?</span><textarea id="discussion-topic" rows="6" maxlength="1500" placeholder="Écrivez librement ce que vous souhaitez aborder."></textarea></label>
+<label class="honeypot" aria-hidden="true">Site web<input id="website-field" type="text" tabindex="-1" autocomplete="off"></label>
+</div>
+<p data-schedule-copy></p>
+<div class="booking-availability" data-availability aria-live="polite"></div>
+<div class="price-panel"><span>Montant prévu</span><strong data-price-summary>—</strong></div>
+<p class="payment-notice" data-payment-notice></p>
+<label class="consent"><input id="booking-consent" type="checkbox" required><span>J’accepte que mes renseignements soient utilisés pour traiter ma réservation et je comprends que les paiements seront non remboursables une fois Stripe activé.</span></label>
+<button class="button button--primary button--large" type="submit">Enregistrer ma réservation</button>
+<p class="form-status" data-booking-status role="status" aria-live="polite"></p>
+</form>
+</div>
+<aside class="booking-summary"><span class="kicker">Résumé</span><strong data-price-summary>—</strong><p>Capacité affichée en direct pour chaque séance.</p><ul><li>Coaching personnel : 1 personne</li><li>Modules de groupe : jusqu’à 20 personnes</li><li>Annulation ou reprogrammation : au moins 2 heures avant</li><li>Zoom, téléphone ou autre option</li></ul></aside>
+</div></section>
+</main>
+<footer class="site-footer"><div class="container footer-bottom"><span>© <span data-year></span> Becoming Training Center.</span><span>Site conçu par Ederito — Zanara Labs LLC</span></div></footer>
+<button class="back-to-top" type="button" aria-label="Retour en haut" data-backtop>↑</button>
+<script src="assets/js/site.js" defer></script>
+<script src="assets/js/booking.js" defer></script>
+</body></html>
