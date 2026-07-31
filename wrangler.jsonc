@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "becoming-training-center-website",
+  "compatibility_date": "2026-07-31",
+  "assets": {
+    "directory": "./"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "becoming-training-center-prod",
+      "database_id": "1d0ac685-33ec-44dd-98fb-1bf613259ccd"
+    }
+  ]
+}
