@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "becoming-training-center-website",
-  "main": "worker/contact-wrapper.js",
+  "main": "worker/contact-wrapper-v2.js",
   "compatibility_date": "2026-07-31",
   "assets": {
     "directory": "./",
