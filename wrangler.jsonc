@@ -1,9 +1,11 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "becoming-training-center-website",
+  "main": "worker/index.js",
   "compatibility_date": "2026-07-31",
   "assets": {
-    "directory": "./"
+    "directory": "./",
+    "binding": "ASSETS"
   },
   "d1_databases": [
     {
