@@ -89,9 +89,30 @@ async function ensureContactTable(db) {
   `).run();
 }
 
+function shouldEnhanceBookingPage(url) {
+  return url.pathname === '/booking.html' || url.pathname === '/en/booking.html';
+}
+
+async function enhanceBookingPage(request, env) {
+  const response = await env.ASSETS.fetch(request);
+  if (!response.ok) return response;
+
+  return new HTMLRewriter()
+    .on('body', {
+      element(element) {
+        element.append('<script src="/assets/js/contact-enhancements.js" defer></script>', { html: true });
+      }
+    })
+    .transform(response);
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    if (request.method === 'GET' && shouldEnhanceBookingPage(url)) {
+      return enhanceBookingPage(request, env);
+    }
 
     if (url.pathname !== '/api/bookings' || request.method !== 'POST') {
       return bookingWorker.fetch(request, env, ctx);
