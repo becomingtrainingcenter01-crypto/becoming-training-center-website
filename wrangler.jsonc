@@ -5,7 +5,12 @@
   "compatibility_date": "2026-07-31",
   "assets": {
     "directory": "./",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*",
+      "/booking*",
+      "/en/booking*"
+    ]
   },
   "d1_databases": [
     {
