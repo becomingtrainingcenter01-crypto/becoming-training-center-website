@@ -17,7 +17,9 @@
     phoneHint: 'Entrez seulement le numéro local. L’indicatif sélectionné sera ajouté automatiquement.',
     phoneRequired: 'Un numéro de téléphone valide est obligatoire pour WhatsApp ou un appel téléphonique.',
     invalidPhone: 'Vérifiez le pays, l’indicatif et le numéro de téléphone.',
-    invalidArea: 'L’indicatif régional ne correspond pas au pays sélectionné.'
+    invalidArea: 'L’indicatif régional ne correspond pas au pays sélectionné.',
+    paymentNotice: 'Après l’envoi du formulaire, vous serez redirigé(e) vers Stripe pour effectuer le paiement sécurisé et confirmer la réservation.',
+    redirecting: 'Redirection vers le paiement sécurisé Stripe…'
   } : {
     phone: 'Phone number',
     country: 'Country / calling code',
@@ -28,7 +30,9 @@
     phoneHint: 'Enter the local number only. The selected calling code will be added automatically.',
     phoneRequired: 'A valid phone number is required for WhatsApp or a phone call.',
     invalidPhone: 'Check the country, calling code, and phone number.',
-    invalidArea: 'The area code does not match the selected country.'
+    invalidArea: 'The area code does not match the selected country.',
+    paymentNotice: 'After submitting the form, you will be redirected to Stripe to complete the secure payment and confirm your booking.',
+    redirecting: 'Redirecting to secure Stripe payment…'
   };
 
   const countries = [
@@ -98,10 +102,27 @@
   contactSelect.addEventListener('change', updatePhoneRequirement);
   updatePhoneRequirement();
 
+  const paymentNotice = form.querySelector('[data-payment-notice]');
+  function keepPaymentNoticeCurrent() {
+    if (paymentNotice && paymentNotice.textContent !== copy.paymentNotice) {
+      paymentNotice.textContent = copy.paymentNotice;
+    }
+  }
+  if (paymentNotice) {
+    keepPaymentNoticeCurrent();
+    new MutationObserver(keepPaymentNoticeCurrent).observe(paymentNotice, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+  }
+
   const originalFetch = window.fetch.bind(window);
   window.fetch = async (input, init = {}) => {
     const url = typeof input === 'string' ? input : input?.url;
-    if (url === '/api/bookings' && String(init.method || 'GET').toUpperCase() === 'POST') {
+    const isBookingRequest = url === '/api/bookings' && String(init.method || 'GET').toUpperCase() === 'POST';
+
+    if (isBookingRequest) {
       let payload;
       try {
         payload = JSON.parse(init.body || '{}');
@@ -122,7 +143,26 @@
       payload.preferred_contact_method = contactSelect.value;
       init = { ...init, body: JSON.stringify(payload) };
     }
-    return originalFetch(input, init);
+
+    const response = await originalFetch(input, init);
+
+    if (isBookingRequest && response.ok) {
+      try {
+        const result = await response.clone().json();
+        if (typeof result.checkout_url === 'string' && result.checkout_url.startsWith('https://checkout.stripe.com/')) {
+          const status = form.querySelector('[data-booking-status]');
+          if (status) {
+            status.textContent = copy.redirecting;
+            status.className = 'form-status is-success';
+          }
+          window.location.assign(result.checkout_url);
+        }
+      } catch (error) {
+        console.error('Unable to open Stripe Checkout', error);
+      }
+    }
+
+    return response;
   };
 
   window.addEventListener('unhandledrejection', event => {
