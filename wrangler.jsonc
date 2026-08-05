@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "becoming-training-center-website",
-  "main": "worker/vip-account-security-wrapper.js",
+  "main": "worker/password-reset-wrapper.js",
   "compatibility_date": "2026-07-31",
   "assets": {
     "directory": "./",
@@ -14,6 +14,10 @@
       "/en/vip*",
       "/account*",
       "/en/account*",
+      "/forgot-password*",
+      "/en/forgot-password*",
+      "/reset-password*",
+      "/en/reset-password*",
       "/member*",
       "/en/member*"
     ]
