@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "becoming-training-center-website",
-  "main": "worker/vip-subscription-wrapper.js",
+  "main": "worker/vip-account-entry-wrapper.js",
   "compatibility_date": "2026-07-31",
   "assets": {
     "directory": "./",
@@ -11,7 +11,11 @@
       "/booking*",
       "/en/booking*",
       "/vip*",
-      "/en/vip*"
+      "/en/vip*",
+      "/account*",
+      "/en/account*",
+      "/member*",
+      "/en/member*"
     ]
   },
   "d1_databases": [
