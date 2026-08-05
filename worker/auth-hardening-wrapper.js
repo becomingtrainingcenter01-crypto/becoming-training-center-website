@@ -142,6 +142,28 @@ async function loginKeys(request, email) {
   };
 }
 
+async function upgradePasswordHash(env, email, password) {
+  const account = await env.DB.prepare(`
+    SELECT id, password_iterations FROM vip_accounts WHERE email = ?
+  `).bind(normalizeEmail(email)).first();
+  if (!account?.id || Number(account.password_iterations || 0) >= PASSWORD_ITERATIONS) return;
+
+  const salt = new Uint8Array(16);
+  crypto.getRandomValues(salt);
+  const digest = await passwordDigest(password, salt);
+  await env.DB.prepare(`
+    UPDATE vip_accounts
+    SET password_salt = ?, password_hash = ?, password_iterations = ?,
+        updated_at = CURRENT_TIMESTAMP
+    WHERE id = ?
+  `).bind(
+    bytesToBase64Url(salt),
+    bytesToBase64Url(digest),
+    PASSWORD_ITERATIONS,
+    account.id
+  ).run();
+}
+
 async function enforceLoginLimits(request, env, ctx) {
   let body;
   try {
@@ -169,7 +191,8 @@ async function enforceLoginLimits(request, env, ctx) {
   if (response.ok) {
     ctx.waitUntil(Promise.all([
       clearLimit(env.DB, keys.ipKey),
-      clearLimit(env.DB, keys.emailKey)
+      clearLimit(env.DB, keys.emailKey),
+      upgradePasswordHash(env, email, body.password)
     ]));
   } else if (response.status === 401) {
     ctx.waitUntil(Promise.all([
@@ -178,27 +201,6 @@ async function enforceLoginLimits(request, env, ctx) {
     ]));
   }
   return response;
-}
-
-async function upgradePasswordHash(env, email, password) {
-  const account = await env.DB.prepare('SELECT id FROM vip_accounts WHERE email = ?')
-    .bind(normalizeEmail(email)).first();
-  if (!account?.id) return;
-
-  const salt = new Uint8Array(16);
-  crypto.getRandomValues(salt);
-  const digest = await passwordDigest(password, salt);
-  await env.DB.prepare(`
-    UPDATE vip_accounts
-    SET password_salt = ?, password_hash = ?, password_iterations = ?,
-        updated_at = CURRENT_TIMESTAMP
-    WHERE id = ?
-  `).bind(
-    bytesToBase64Url(salt),
-    bytesToBase64Url(digest),
-    PASSWORD_ITERATIONS,
-    account.id
-  ).run();
 }
 
 async function enforceStrongPassword(request, env, ctx) {
