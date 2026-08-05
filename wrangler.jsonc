@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "becoming-training-center-website",
-  "main": "worker/training-stripe-wrapper.js",
+  "main": "worker/vip-subscription-wrapper.js",
   "compatibility_date": "2026-07-31",
   "assets": {
     "directory": "./",
@@ -9,7 +9,9 @@
     "run_worker_first": [
       "/api/*",
       "/booking*",
-      "/en/booking*"
+      "/en/booking*",
+      "/vip*",
+      "/en/vip*"
     ]
   },
   "d1_databases": [
