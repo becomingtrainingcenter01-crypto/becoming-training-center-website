@@ -9,6 +9,7 @@
   const WHATSAPP_NUMBER = '16892290770';
   const FACEBOOK_URL = 'https://www.facebook.com/share/1JxasHrmQS/?mibextid=wwXIfr';
   const EDERITO_INSTAGRAM_URL = 'https://www.instagram.com/ederito_studio/';
+  const ASSET_VERSION = '20260828-2';
   let lastY = window.scrollY;
 
   const patch = document.createElement('style');
@@ -120,7 +121,7 @@
   const assetRoot = location.pathname.includes('/en/') ? '../' : '';
   const loadScript = (src) => {
     const script = document.createElement('script');
-    script.src = `${assetRoot}${src}`;
+    script.src = `${assetRoot}${src}?v=${ASSET_VERSION}`;
     script.defer = true;
     document.body.appendChild(script);
   };
