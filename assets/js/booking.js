@@ -84,7 +84,7 @@
   function dayAllowed(programCode, dateValue) {
     if (!dateValue) return false;
     const day = new Date(`${dateValue}T12:00:00Z`).getUTCDay();
-    if (programCode === 'personal') return day === 6;
+    if (programCode === 'personal') return day >= 2 && day <= 5;
     if (programCode === 'parenting' || programCode === 'wellness') return day === 1;
     if (programCode === 'business') return day === 0 || day === 6;
     return false;

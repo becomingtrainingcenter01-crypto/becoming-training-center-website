@@ -3,7 +3,7 @@
 
   const copy = {
     fr: {
-      personalSchedule: 'Tous les samedis, de 8 h à 12 h 30 (heure de l’Est). Chaque réservation bloque une plage pouvant aller jusqu’à 45 minutes. La séance peut se terminer plus tôt selon le sujet.',
+      personalSchedule: 'Du mardi au vendredi, de 9 h à 17 h (heure de l’Est). Chaque réservation bloque une plage pouvant aller jusqu’à 45 minutes. La séance peut se terminer plus tôt selon le sujet.',
       personalDuration: 'Jusqu’à 45 minutes',
       parentingSchedule: 'Choisissez librement le module que vous souhaitez suivre. Les modules sont offerts tous les lundis, de 10 h 30 à 17 h 30 (heure de l’Est).',
       businessSchedule: 'Choisissez librement le module que vous souhaitez suivre. Les modules d’affaires sont offerts le samedi et le dimanche, de 11 h 30 à 19 h 30 (heure de l’Est).',
@@ -15,11 +15,11 @@
       wellnessAvailability: 'Lundi · 10 h 30 à 17 h 30 ET',
       businessAvailability: 'Samedi ou dimanche · 11 h 30 à 19 h 30 ET',
       exactTime: 'La plage exacte de 1 h 30 sera choisie dans le calendrier en direct.',
-      bookingPolicy: '<h3>Informations de réservation</h3><ul><li>Tous les horaires sont affichés en heure de l’Est.</li><li>Coaching personnel : samedi, de 8 h à 12 h 30, jusqu’à 45 minutes.</li><li>Modules parental et bien-être : lundi, de 10 h 30 à 17 h 30.</li><li>Modules d’affaires : samedi et dimanche, de 11 h 30 à 19 h 30.</li><li>Chaque module dure 1 h 30 et peut accueillir jusqu’à 20 participants.</li><li>Les séances ont lieu sur Zoom ou WhatsApp.</li><li>Annulation ou reprogrammation au moins 2 heures avant.</li><li>Les paiements sont définitifs et non remboursables.</li></ul>',
-      terms: '<h2>Réservations, annulations et remboursements</h2><p>Tous les rendez-vous sont affichés en heure de l’Est. Les séances de coaching personnel sont offertes le samedi, de 8 h à 12 h 30, et peuvent durer jusqu’à 45 minutes. Elles ont lieu sur Zoom ou WhatsApp.</p><p>Les clients peuvent choisir le module parental ou bien-être de leur choix le lundi, entre 10 h 30 et 17 h 30. Les modules d’affaires sont offerts le samedi et le dimanche, entre 11 h 30 et 19 h 30. Chaque module dure 1 h 30 et peut accueillir jusqu’à 20 participants pour le même module et la même séance.</p><p>Toute annulation ou reprogrammation doit être demandée au moins 2 heures avant l’heure prévue. Tous les paiements sont définitifs et non remboursables.</p>'
+      bookingPolicy: '<h3>Informations de réservation</h3><ul><li>Tous les horaires sont affichés en heure de l’Est.</li><li>Coaching personnel : du mardi au vendredi, de 9 h à 17 h, jusqu’à 45 minutes.</li><li>Modules parental et bien-être : lundi, de 10 h 30 à 17 h 30.</li><li>Modules d’affaires : samedi et dimanche, de 11 h 30 à 19 h 30.</li><li>Chaque module dure 1 h 30 et peut accueillir jusqu’à 20 participants.</li><li>Les séances ont lieu sur Zoom ou WhatsApp.</li><li>Annulation ou reprogrammation au moins 2 heures avant.</li><li>Les paiements sont définitifs et non remboursables.</li></ul>',
+      terms: '<h2>Réservations, annulations et remboursements</h2><p>Tous les rendez-vous sont affichés en heure de l’Est. Les séances de coaching personnel sont offertes du mardi au vendredi, de 9 h à 17 h, et peuvent durer jusqu’à 45 minutes. Elles ont lieu sur Zoom ou WhatsApp.</p><p>Les clients peuvent choisir le module parental ou bien-être de leur choix le lundi, entre 10 h 30 et 17 h 30. Les modules d’affaires sont offerts le samedi et le dimanche, entre 11 h 30 et 19 h 30. Chaque module dure 1 h 30 et peut accueillir jusqu’à 20 participants pour le même module et la même séance.</p><p>Toute annulation ou reprogrammation doit être demandée au moins 2 heures avant l’heure prévue. Tous les paiements sont définitifs et non remboursables.</p>'
     },
     en: {
-      personalSchedule: 'Every Saturday from 8:00 a.m. to 12:30 p.m. Eastern Time. Each booking reserves up to 45 minutes, although the session may end earlier depending on the topic.',
+      personalSchedule: 'Tuesday through Friday from 9:00 a.m. to 5:00 p.m. Eastern Time. Each booking reserves up to 45 minutes, although the session may end earlier depending on the topic.',
       personalDuration: 'Up to 45 minutes',
       parentingSchedule: 'Choose any module you would like to attend. Modules are available every Monday from 10:30 a.m. to 5:30 p.m. Eastern Time.',
       businessSchedule: 'Choose any module you would like to attend. Business modules are available Saturday and Sunday from 11:30 a.m. to 7:30 p.m. Eastern Time.',
@@ -31,8 +31,8 @@
       wellnessAvailability: 'Monday · 10:30 a.m.–5:30 p.m. ET',
       businessAvailability: 'Saturday or Sunday · 11:30 a.m.–7:30 p.m. ET',
       exactTime: 'The exact 90-minute time slot will be selected in the live calendar.',
-      bookingPolicy: '<h3>Booking information</h3><ul><li>All times are shown in Eastern Time.</li><li>Personal coaching: Saturday, 8:00 a.m.–12:30 p.m., up to 45 minutes.</li><li>Parenting and wellness modules: Monday, 10:30 a.m.–5:30 p.m.</li><li>Business modules: Saturday and Sunday, 11:30 a.m.–7:30 p.m.</li><li>Each module lasts 90 minutes and may include up to 20 participants.</li><li>Sessions take place through Zoom or WhatsApp.</li><li>Cancel or reschedule at least 2 hours in advance.</li><li>All payments are final and non-refundable.</li></ul>',
-      terms: '<h2>Bookings, cancellations, and refunds</h2><p>All appointments are shown in Eastern Time. Personal coaching is available Saturday from 8:00 a.m. to 12:30 p.m. and may last up to 45 minutes. Sessions take place through Zoom or WhatsApp.</p><p>Clients may choose any parenting or wellness module on Monday between 10:30 a.m. and 5:30 p.m. Business modules are available Saturday and Sunday between 11:30 a.m. and 7:30 p.m. Each module lasts 90 minutes and may include up to 20 participants booking the same module for the same session.</p><p>Cancellation or rescheduling must be requested at least 2 hours before the scheduled time. All payments are final and non-refundable.</p>'
+      bookingPolicy: '<h3>Booking information</h3><ul><li>All times are shown in Eastern Time.</li><li>Personal coaching: Tuesday through Friday, 9:00 a.m.–5:00 p.m., up to 45 minutes.</li><li>Parenting and wellness modules: Monday, 10:30 a.m.–5:30 p.m.</li><li>Business modules: Saturday and Sunday, 11:30 a.m.–7:30 p.m.</li><li>Each module lasts 90 minutes and may include up to 20 participants.</li><li>Sessions take place through Zoom or WhatsApp.</li><li>Cancel or reschedule at least 2 hours in advance.</li><li>All payments are final and non-refundable.</li></ul>',
+      terms: '<h2>Bookings, cancellations, and refunds</h2><p>All appointments are shown in Eastern Time. Personal coaching is available Tuesday through Friday from 9:00 a.m. to 5:00 p.m. and may last up to 45 minutes. Sessions take place through Zoom or WhatsApp.</p><p>Clients may choose any parenting or wellness module on Monday between 10:30 a.m. and 5:30 p.m. Business modules are available Saturday and Sunday between 11:30 a.m. and 7:30 p.m. Each module lasts 90 minutes and may include up to 20 participants booking the same module for the same session.</p><p>Cancellation or rescheduling must be requested at least 2 hours before the scheduled time. All payments are final and non-refundable.</p>'
     }
   }[lang];
 
@@ -45,6 +45,12 @@
     const facts = intro?.querySelectorAll('.detail-facts strong');
     if (facts?.[0]) facts[0].textContent = duration;
     if (facts?.[1]) facts[1].textContent = price;
+    if (id === '#personal') {
+      const kicker = intro?.querySelector('.kicker');
+      if (kicker) kicker.textContent = lang === 'fr'
+        ? 'Du mardi au vendredi · 9 h à 17 h'
+        : 'Tuesday–Friday · 9:00 a.m.–5:00 p.m.';
+    }
     const panel = section.querySelector('.module-panel');
     if (addCapacity && panel) {
       let note = panel.querySelector('.capacity-note');
@@ -151,13 +157,13 @@
 
       if (slotHolder) {
         const label = selected === 'personal'
-          ? (lang === 'fr' ? 'Samedi · choisissez une heure de début' : 'Saturday · choose a start time')
+          ? (lang === 'fr' ? 'Mardi à vendredi · choisissez une heure de début' : 'Tuesday–Friday · choose a start time')
           : selected === 'business' ? copy.businessAvailability
           : selected === 'wellness' ? copy.wellnessAvailability
           : copy.parentingAvailability;
         slotHolder.innerHTML = '';
         if (selected === 'personal') {
-          ['8:00 AM', '8:45 AM', '9:30 AM', '10:15 AM', '11:00 AM', '11:45 AM'].forEach((time) => {
+          ['9:00 AM', '9:45 AM', '10:30 AM', '11:15 AM', '12:00 PM', '12:45 PM', '1:30 PM', '2:15 PM', '3:00 PM', '3:45 PM', '4:15 PM'].forEach((time) => {
             const button = document.createElement('button');
             button.type = 'button';
             button.className = 'time-slot';

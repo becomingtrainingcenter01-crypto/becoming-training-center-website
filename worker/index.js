@@ -10,8 +10,8 @@ const PROGRAMS = [
     full_package_cents: null,
     duration_minutes: 45,
     capacity: 1,
-    schedule_fr: 'Samedi, de 8 h à 12 h 30 (heure de l’Est)',
-    schedule_en: 'Saturday, 8:00 a.m.–12:30 p.m. Eastern Time'
+    schedule_fr: 'Du mardi au vendredi, de 9 h à 17 h (heure de l’Est)',
+    schedule_en: 'Tuesday through Friday, 9:00 a.m.–5:00 p.m. Eastern Time'
   },
   {
     code: 'parenting',
@@ -78,7 +78,7 @@ const MODULES = {
 };
 
 const TIME_SLOTS = {
-  personal: ['08:00', '08:45', '09:30', '10:15', '11:00', '11:45'],
+  personal: ['09:00', '09:45', '10:30', '11:15', '12:00', '12:45', '13:30', '14:15', '15:00', '15:45', '16:15'],
   parenting: ['10:30', '12:00', '13:30', '15:00'],
   wellness: ['10:30', '12:00', '13:30', '15:00'],
   business: ['11:30', '13:00', '14:30', '16:00', '17:30']
@@ -126,7 +126,7 @@ function dayOfWeek(dateString) {
 function validSchedule(programCode, dateString, startTime) {
   const day = dayOfWeek(dateString);
   if (!TIME_SLOTS[programCode]?.includes(startTime)) return false;
-  if (programCode === 'personal') return day === 6;
+  if (programCode === 'personal') return day >= 2 && day <= 5;
   if (programCode === 'parenting' || programCode === 'wellness') return day === 1;
   if (programCode === 'business') return day === 0 || day === 6;
   return false;
